@@ -1,13 +1,19 @@
 import { Injectable, Type } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { Card } from '../../modules/card/models/card.model';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class CallApiService {
-  
-  constructor() {}
+  private Cards: Card[] = [];
+  private readonly CardsObs$: Subject<Card[]> = new Subject();
+  public readonly CardsObs = this.CardsObs$.asObservable();
+
+constructor(){
+  // this.getCards('https://db.ygoprodeck.com/api/v7/cardinfo.php?race=Machine');
+}
 
   // Método GET genérico
   getData(url: string): Observable<any> {
@@ -25,12 +31,27 @@ export class CallApiService {
     });
   }
 
+  async getCards(endpoint: string, params?: URLSearchParams){
+    const url = params ? `${endpoint}?${params.toString()}` : endpoint;
+    try{
+      const response = await fetch(url);
+      if(response.ok){
+        const json = await response.json()
+        this.Cards = json.data;
+        this.CardsObs$.next(this.Cards);
+      }
+    } catch (error) {
+      this.CardsObs$.error(error)
+    }
+  }
+
   /**
    * Função para fazer chamadas GET genéricas para a API
    * @param endpoint: URL da API (pode ser relativa à baseUrl)
    * @param params: parâmetros adicionais para a requisição
    */
   get<T>(endpoint: string, params?: URLSearchParams): Observable<T> {
+    // this.getCards(endpoint);
     const url = params ? `${endpoint}?${params.toString()}` : endpoint;
     return new Observable((observer) => {
       fetch(url)
