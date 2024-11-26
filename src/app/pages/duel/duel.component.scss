@@ -1,0 +1,127 @@
+:host {
+  display: block;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: url('../../layouts/Images/background_duel.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.cell {
+  flex: 1;
+  border: 3px solid #333;
+  margin: 0 5px;
+  background-color: rgba(211, 211, 211, 0.1); /* Cor de fundo com transparência */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  height: 100%;
+  overflow: hidden; /* Garante que a imagem não ultrapasse os limites da célula */
+}
+
+.board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh; /* Ocupa toda a altura da tela */
+  padding: 10px; /* Margem interna opcional */
+}
+
+.row {
+  display: flex;
+  // justify-content: space-between;
+  justify-content: space-around;
+  width: 100%;
+  flex: 1; /* Faz com que cada linha ocupe proporcionalmente o espaço disponível */
+}
+
+/* Separador horizontal */
+.separator {
+  margin: 20px 0;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra preta leve */
+}
+
+/* Estilo para a última célula */
+.cell-last {
+  // background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
+  background-image: url('../../layouts/Images/background_deck.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+// @keyframes shine {
+//   0% {
+//     box-shadow: 0 0 4px 2px rgba(255, 223, 0, 0.5);
+//     border: 2px solid rgba(255, 223, 0, 0.5);
+//   }
+//   50% {
+
+//     box-shadow: 0 0 4px 2px rgba(247, 189, 0, 0.986);
+//     border: 2px solid rgba(247, 189, 0, 0.986);
+//   }
+//   100% {
+//     box-shadow: 0 0 17px 3px rgba(255, 230, 0, 0.815);
+//     border: 2px solid rgba(255, 230, 0, 0.815);
+//   }
+// }
+
+// .shine {
+//   display: inline-block;
+//   border-radius: 10px;
+//   animation: shine 2s infinite alternate;
+// }
+
+
+@keyframes rotating-border {
+  0% {
+    border: 2px solid rgba(255, 255, 255, 0.8); /* Branca */
+    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.4);
+  }
+  20% {
+    border: 2px solid rgba(230, 230, 230, 0.8); /* Cinza muito claro */
+    box-shadow: 0 0 15px 5px rgba(230, 230, 230, 0.4);
+  }
+  40% {
+    border: 2px solid rgba(192, 192, 192, 0.8); /* Prateada */
+    box-shadow: 0 0 15px 5px rgba(192, 192, 192, 0.4);
+  }
+  60% {
+    border: 2px solid rgba(211, 211, 211, 0.8); /* Cinza claro */
+    box-shadow: 0 0 15px 5px rgba(211, 211, 211, 0.4);
+  }
+  80% {
+    border: 2px solid rgba(169, 169, 169, 0.8); /* Cinza escuro */
+    box-shadow: 0 0 15px 5px rgba(169, 169, 169, 0.4);
+  }
+  100% {
+    border: 2px solid rgba(255, 255, 255, 0.8); /* Branca */
+    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.4);
+  }
+}
+
+.glowing-border {
+  display: inline-block;
+  // border-radius: 10px;
+  animation: rotating-border 2s infinite linear;
+}
+
+/* Estilo para a imagem da carta */
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Faz a imagem se ajustar ao conteúdo da célula, sem cortar ou distorcer */
+  // object-position: center;  /* Centraliza a imagem dentro da célula, se necessário */
+}
+
+
+
+
+

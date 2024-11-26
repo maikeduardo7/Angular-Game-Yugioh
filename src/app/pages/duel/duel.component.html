@@ -1,0 +1,22 @@
+<div class="board-container">
+  <!-- Parte superior -->
+  <div class="row upper-row">
+    <div *ngFor="let cell of upperCells; let last = last, let i = index" 
+    [ngClass]="{'cell': true, 'cell-upper-': (i + 1), 'cell-last': last, 'glowing-border': last}">
+       <!-- Conteúdo das células inferiores com a imagem da carta -->
+      <img *ngIf="cell" [src]="cell" alt="Carta" class="card-image" >
+    </div>
+  </div>
+
+  <!-- Separador -->
+  <div class="separator">--- Duel ---</div>
+
+  <!-- Parte inferior -->
+  <div class="row lower-row">
+    <div *ngFor="let cell of lowerCells; let last = last, , let i = index" 
+         [ngClass]="{'cell': true, 'cell-lower-': (i + 1), 'cell-last': last, 'glowing-border': last}">
+      <!-- Conteúdo das células inferiores com a imagem da carta -->
+      <img *ngIf="cell" [src]="cell" alt="Carta" class="card-image" >
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div *ngIf="data | async as response; else loading">
+    <h2>Lista de Cartas:</h2>
+    <table class="table">
+      <thead>
+        <tr>
+            <th>ID</th>
+            <th>Imagem</th> <!-- Cabeçalho da coluna de imagem -->
+            <th>Nome</th>
+            <th>Atributo</th>
+            <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let card of response.data">
+            <td>{{ card.id }}</td>
+            <td>
+                <img [src]="card.card_images[0].image_url_small" alt="Imagem do Card" width="65" height="75">
+            </td> <!-- Exibe a imagem da carta -->
+            <td>{{ card.name }}</td>
+            <td>{{ card.attribute }}</td>
+            <td>{{ card.type }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #loading>
+    <p>Carregando dados...</p>
+  </ng-template>
+  

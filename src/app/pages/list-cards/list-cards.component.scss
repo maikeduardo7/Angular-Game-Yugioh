@@ -1,0 +1,50 @@
+*{
+    background-color: #303030;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+
+    thead, tbody{
+        color: white;
+    }
+
+    th{
+        background-color: gray;
+    }
+
+    td, th{
+        border: 1px solid #494949;  /* Define a borda das células */
+    } 
+
+    /* Estilo da imagem */
+td img {
+    width: 65px;
+    height: 75px;
+    transition: transform 0.3s ease; /* Transição suave */
+    cursor: pointer; /* Mostra o cursor de ponteiro */
+    display: inline-block; /* Garantir que a imagem seja tratada como um elemento inline */
+  }
+  
+  /* Efeito de aumento quando o mouse passa sobre a imagem */
+  td img:hover {
+    transform: scale(4.5); /* Aumenta a imagem para o dobro do tamanho */
+    // position: absolute; /* Tira a imagem do fluxo normal da tabela */
+    z-index: 10; /* Coloca a imagem acima das outras células */
+  }
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+h2{
+    color: white;
+}
