@@ -1,6 +1,7 @@
 import { Injectable, Type } from '@angular/core';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { Card } from '../../modules/card/models/card.model';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CallApiService {
   private readonly CardsObs$: Subject<Card[]> = new Subject();
   public readonly CardsObs = this.CardsObs$.asObservable();
 
-constructor(){
+constructor(private httpClient: HttpClient){
   // this.getCards('https://db.ygoprodeck.com/api/v7/cardinfo.php?race=Machine');
 }
 
@@ -32,14 +33,17 @@ constructor(){
   }
 
   async getCards(endpoint: string, params?: URLSearchParams){
+
     const url = params ? `${endpoint}?${params.toString()}` : endpoint;
     try{
       const response = await fetch(url);
+
       if(response.ok){
         const json = await response.json()
         this.Cards = json.data;
         this.CardsObs$.next(this.Cards);
       }
+
     } catch (error) {
       this.CardsObs$.error(error)
     }
@@ -50,21 +54,24 @@ constructor(){
    * @param endpoint: URL da API (pode ser relativa à baseUrl)
    * @param params: parâmetros adicionais para a requisição
    */
-  get<T>(endpoint: string, params?: URLSearchParams): Observable<T> {
-    // this.getCards(endpoint);
-    const url = params ? `${endpoint}?${params.toString()}` : endpoint;
-    return new Observable((observer) => {
-      fetch(url)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(data => observer.next(data))
-        .catch(error => observer.error(error))
-        .finally(() => observer.complete());
-    });
+  // async get<T>(endpoint: string, params?: URLSearchParams){
+  
+  //   return new Promise<T>( async (resolve, reject) => {
+  //     const url = params ? `${endpoint}?${params.toString()}` : endpoint;
+  //     const response = await  fetch(url);
+  //     if (!response.ok) {
+  //       reject(new Error('Network response was not ok'));
+  //     }
+  //     const data: T = await response.json();
+  //     resolve(data);
+  //   });
+  // }
+
+  get<T>(endpoint: string, params?: Record<string, string | number>){
+  
+    const httpParam = new HttpParams({ fromObject: params});
+    return this.httpClient.get<T>(endpoint, { params: httpParam })
+    
   }
 
   /**

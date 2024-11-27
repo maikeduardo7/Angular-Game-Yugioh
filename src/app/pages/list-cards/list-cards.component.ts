@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ApiResponse } from '../../core/models/api-response.model';
 import { Card } from '../../modules/card/models/card.model';
 import { CallApiService } from '../../core/services/call-api.service';
@@ -15,9 +15,8 @@ import { CommonModule } from '@angular/common';
 })
 export class ListCardsComponent implements OnInit {
 
-  
   // Objeto genérico para armazenar os dados
-  public data?: Observable<ApiResponse<Card>>;
+  public data?: Card[];
 
   // URL do endpoint que você deseja chamar
   //private apiUrl = 'https://db.ygoprodeck.com/api/v7/cardinfo.php';
@@ -28,9 +27,14 @@ export class ListCardsComponent implements OnInit {
     
   }
   ngOnInit(): void {
-    
-    // Atribuindo o Observable diretamente à variável `data`
-    this.data = this.callApiService.get<ApiResponse<Card>>(this.apiUrl)
+
+    // this.data = await this.callApiService.get<ApiResponse<Card>>(this.apiUrl)
+
+    this.callApiService.get<ApiResponse<Card>>(this.apiUrl)
+    .pipe(map(x => x.data))
+    .subscribe((data) => {
+      this.data = data;
+    });
 
   }
 
