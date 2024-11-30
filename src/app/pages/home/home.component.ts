@@ -1,6 +1,5 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { CallApiService } from '../../core/services/call-api.service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Card } from '../../modules/card/models/card.model';

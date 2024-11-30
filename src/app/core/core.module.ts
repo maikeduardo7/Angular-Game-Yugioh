@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CallApiService } from './services/call-api.service';
+import { CallApiService } from './services/api.service';
 
 
 

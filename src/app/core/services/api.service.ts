@@ -7,7 +7,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 
-export class CallApiService {
+export class ApiService {
   private Cards: Card[] = [];
   private readonly CardsObs$: Subject<Card[]> = new Subject();
   public readonly CardsObs = this.CardsObs$.asObservable();
@@ -54,19 +54,6 @@ constructor(private httpClient: HttpClient){
    * @param endpoint: URL da API (pode ser relativa à baseUrl)
    * @param params: parâmetros adicionais para a requisição
    */
-  // async get<T>(endpoint: string, params?: URLSearchParams){
-  
-  //   return new Promise<T>( async (resolve, reject) => {
-  //     const url = params ? `${endpoint}?${params.toString()}` : endpoint;
-  //     const response = await  fetch(url);
-  //     if (!response.ok) {
-  //       reject(new Error('Network response was not ok'));
-  //     }
-  //     const data: T = await response.json();
-  //     resolve(data);
-  //   });
-  // }
-
   get<T>(endpoint: string, params?: Record<string, string | number>){
   
     const httpParam = new HttpParams({ fromObject: params});

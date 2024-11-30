@@ -1,4 +1,4 @@
-<div *ngIf="data | async as response; else loading">
+<div *ngIf="data; else loading">
     <h2>Lista de Cartas:</h2>
     <table class="table">
       <thead>
@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let card of response.data">
+        <tr *ngFor="let card of data">
             <td>{{ card.id }}</td>
             <td>
                 <img [src]="card.card_images[0].image_url_small" alt="Imagem do Card" width="65" height="75">

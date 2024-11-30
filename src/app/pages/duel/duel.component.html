@@ -1,23 +1,68 @@
 <div class="board-container">
-  <!-- Parte superior -->
-  <div class="row upper-row">
-    <div *ngFor="let cell of upperCells; let last = last, let i = index" 
-    [ngClass]="{'cell': true, 'cell-upper-': (i + 1), 'cell-last': last, 'glowing-border': last}">
+  <!-- Parte superior Monstros -->
+  <div class="row upper-row-monsters">
+    <div *ngFor="let cell of upperCellsMonsters; let last = last, let i = index" 
+    [class]="'cell cell-upper-' + (i + 1) + (last ? ' cell-last glowing-border' : '')">
        <!-- Conteúdo das células inferiores com a imagem da carta -->
       <img *ngIf="cell" [src]="cell" alt="Carta" class="card-image" >
     </div>
   </div>
 
-  <!-- Separador -->
-  <div class="separator">--- Duel ---</div>
-
-  <!-- Parte inferior -->
-  <div class="row lower-row">
-    <div *ngFor="let cell of lowerCells; let last = last, , let i = index" 
-         [ngClass]="{'cell': true, 'cell-lower-': (i + 1), 'cell-last': last, 'glowing-border': last}">
+  <!-- Parte superior Magicas -->
+  <div class="row upper-row-magics">
+    <div *ngFor="let cell of upperCellsMagics; let last = last, let i = index" 
+    [class]="'cell cell-upper-' + (i + 5) + (last ? ' cell-last glowing-border' : '')">
       <!-- Conteúdo das células inferiores com a imagem da carta -->
       <img *ngIf="cell" [src]="cell" alt="Carta" class="card-image" >
     </div>
   </div>
-  
+
+  <!-- Separador -->
+  <div class="separator">---</div>
+
+  <!-- Parte inferior Monstros -->
+  <div class="row lower-row-monsters">
+    <div *ngFor="let cell of lowerCellsMonsters; let last = last, , let i = index" 
+    [class]="'cell cell-lower-' + (i + 1) + (last ? ' cell-last glowing-border' : '')">
+      <!-- Conteúdo das células inferiores com a imagem da carta -->
+      <img *ngIf="cell" [src]="cell" alt="Carta" class="card-image" >
+    </div>
+  </div>
+
+  <!-- Parte inferior Mágicas -->
+  <div class="row lower-row-magics">
+    <div *ngFor="let cell of lowerCellsMagics; let last = last, , let i = index" 
+    [class]="'cell cell-lower-' + (i + 5) + (last ? ' cell-last glowing-border' : '')">
+      <!-- Conteúdo das células inferiores com a imagem da carta -->
+      <img *ngIf="cell" [src]="cell" alt="Carta" class="card-image" >
+    </div>
+  </div>
+</div>
+
+<div class="hand-container">
+
+  <!-- Pontos de vida -->
+  <div class="life-points">
+    <span class="life-points-title">Life Points</span>
+    <span class="life-points-value">8000</span>
+  </div>
+
+  <!-- Cartas na mão -->
+  <div class="hand-cell" *ngFor="let cell of handCards" (click)="openModal(cell)">
+    <img *ngIf="cell" [src]="cell" alt="Carta" class="card-image">
+  </div>
+
+  <!-- Card Absoluto à Direita -->
+  <div class="right-card">
+    <img src="https://i.pinimg.com/originals/3d/a3/9c/3da39cea425e1fc2b8c7b01d7b0d6c5c.png" class=" card-image">
+  </div>
+
+  <!-- Modal de Exibição da Carta -->
+  <div class="modal" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <img [src]="selectedCard" alt="Carta em Modal" class="modal-image">
+    <button (click)="closeModal()" class="close-btn">Close</button>
+  </div>
+
+
 </div>
